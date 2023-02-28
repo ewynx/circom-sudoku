@@ -101,8 +101,19 @@ template Sudoku(n) {
     }
   }
 
-  // TODO: correct smaller grids
-
+  component distinct_grids[n];
+  for (var i = 0; i < n; i += 3) { 
+    distinct_grids[i] = Distinct(n);
+    
+    // the n arrays must be filled with the n grids of 3x3
+    var index = 0; 
+    for (var j = 0; j < 3; j++) {// j=0,1,2
+      for (var k = 0; k < 3; k++) {// k=0,1,2
+        distinct_grids[i].in[index] <== solution[j][k];// (j,k) = 0,0 0,1 0,2 1,0 1,1 1,2 2,0 2,
+        index++;
+      }
+    }
+  }
 }
 
 component main {public[puzzle]} = Sudoku(9);
